@@ -1,0 +1,55 @@
+---
+import Site from '../layouts/Site.astro';
+import StatusNotice from '../components/StatusNotice.astro';
+import ContractLinks from '../components/ContractLinks.astro';
+import contract from '../data/contract.json';
+
+const negotiation = JSON.stringify({ schema_version: contract.schema_version, abi_version: contract.abi_version, op: 'negotiate' }, null, 2);
+---
+<Site title="Planned API" description="The unreleased Logifos wire contract: operations, versions, fonts, metrics and refusals." page="api">
+  <section class="opening" aria-labelledby="title">
+    <p class="kicker">API / target wire contract</p>
+    <h1 id="title">Explicit requests.<br />Bounded results.</h1>
+    <p class="introduction">The planned facade accepts UTF-8 JSON requests and returns versioned results or structured refusals.</p>
+    <StatusNotice />
+  </section>
+  <ContractLinks />
+  <section id="operations" aria-labelledby="operations-title">
+    <h2 id="operations-title">Planned operations</h2>
+    <p>These are target wire operations, not callable rendering examples or a promise about the current language APIs.</p>
+    <div class="table-scroll" role="region" aria-label="Planned wire operations" tabindex="0">
+      <table>
+        <caption>Unimplemented target API</caption>
+        <thead><tr><th scope="col">Operation</th><th scope="col">Request</th><th scope="col">Planned result</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><code>negotiate</code></th><td>Only versions and operation; optional per-call options.</td><td>Capabilities, implemented operation/output lists, payload identities and effective limits. Version support alone does not imply an implemented operation.</td></tr>
+          <tr><th scope="row"><code>parse</code></th><td><code>format: mathml</code> and source text.</td><td>A MathML syntax value and its external contract identity, not Formula.</td></tr>
+          <tr><th scope="row"><code>transform</code></th><td>MathML format, direction, input and both input/output contract identities.</td><td>Syntax-to-Formula or Formula-to-syntax conversion, preserving supported presentation and child order.</td></tr>
+          <tr><th scope="row"><code>render</code></th><td>Formula value, its contract identity, output and caller fonts in options.</td><td>SVG text, metrics and used-font identities. Core PNG requests receive <code>UNSUPPORTED_OUTPUT</code>.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>MathML is the target format in this contract. LaTeX and AsciiMath are planned later and have no v1 format entry.</p>
+    <h3>Target negotiation request</h3>
+    <p>This illustrates the proposed envelope only. The bootstrap does not implement this exchange.</p>
+    <pre data-wire-example="negotiate"><code>{negotiation}</code></pre>
+  </section>
+  <section id="bytes" aria-labelledby="bytes-title">
+    <h2 id="bytes-title">Bytes and failures</h2>
+    <p>The planned transport uses length-delimited UTF-8 JSON with no BOM or NUL terminator. Duplicate keys, invalid Unicode, nonfinite numbers and trailing data are refused. Version matching is exact; there is no best-effort downgrade. Byte limits and offsets count UTF-8 bytes.</p>
+    <p>The target success envelope has <code>ok: true</code> and <code>result</code>. A failure has <code>ok: false</code> and an <code>error</code> with code, message, JSON Pointer path and stage. Both carry ABI and schema versions. Diagnostic messages are not stable assertion strings.</p>
+    <p>Planned refusals include <code>NOT_IMPLEMENTED</code>, <code>INVALID_REQUEST</code>, <code>UNKNOWN_OPTION</code>, <code>RESOURCE_LIMIT</code>, <code>UNPINNED_CONTRACT</code> and <code>CONTRACT_MISMATCH</code>. Unresolved external pins prevent successful payload qualification. The linked response schema owns the complete error vocabulary.</p>
+  </section>
+  <section id="fonts" aria-labelledby="fonts-title">
+    <h2 id="fonts-title">Planned per-call options and fonts</h2>
+    <p>Options belong to one call. The target defaults are 16 CSS pixels, inline display and black text, with no font resources. Rendering requires caller fonts; an empty font list cannot produce a render.</p>
+    <p>Each font resource supplies an ID, SHA-256, canonical padded base64 bytes and a face index. Fallback order must list every resource ID exactly once. Planned lookup uses that order, with primary MATH constants from the first font. No host fallback, resource path or remote URL is accepted.</p>
+    <p>The contract specifies request, response, depth, tree, glyph and decoded-font ceilings. Callers may lower limits; negotiation may advertise lower hard ceilings. These are target budgets, not measured runtime guarantees. Consult the pinned guide for the values and enforcement order.</p>
+  </section>
+  <section id="results" aria-labelledby="results-title">
+    <h2 id="results-title">Planned SVG, metrics and ownership</h2>
+    <p>A qualified SVG result is planned to contain self-contained SVG with no scripts, external resources or host-font text. Metrics use CSS pixels with a top-left origin, x rightward and y downward. Width is advance; height is the baseline distance, depth extends below it, and baseline equals height. Ink bounds can overhang the logical box.</p>
+    <p>The planned native ABI leaves input bytes with the caller. Owned response bytes must be freed exactly once using the same library context that allocated them. C symbol names, headers and WASM ownership are not established by this wire specification. Panics must not cross runtime boundaries.</p>
+    <p><a href="/migration.html#compatibility">How compatibility is planned to be checked →</a></p>
+  </section>
+</Site>

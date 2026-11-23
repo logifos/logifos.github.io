@@ -1,0 +1,43 @@
+---
+import Site from '../layouts/Site.astro';
+import StatusNotice from '../components/StatusNotice.astro';
+import ContractLinks from '../components/ContractLinks.astro';
+import runtimes from '../data/runtimes.json';
+---
+<Site title="Runtime and version status" description="No Logifos runtime is released or qualified for rendering. Development requirements and planned transports for all four runtimes." page="status">
+  <section class="opening" aria-labelledby="title">
+    <p class="kicker">Status / runtimes and versions</p>
+    <h1 id="title">No released<br />rendering versions.</h1>
+    <p class="introduction">Rust, Ruby, TypeScript and Python are in development. Package names and source version strings do not establish a working renderer.</p>
+    <StatusNotice />
+  </section>
+  <section id="runtime-matrix" aria-labelledby="matrix-title">
+    <h2 id="matrix-title">Runtime matrix</h2>
+    <p>Development requirements below describe bootstrap work only. They are not supported rendering versions or verified platform claims.</p>
+    <div class="table-scroll" role="region" aria-label="Runtime and version matrix" tabindex="0">
+      <table>
+        <caption>Unreleased runtime targets</caption>
+        <thead><tr><th scope="col">Runtime / package</th><th scope="col">Released renderer</th><th scope="col">Development requirement</th><th scope="col">Planned transport</th><th scope="col">Planned output</th></tr></thead>
+        <tbody>
+          {runtimes.map((runtime) => (
+            <tr data-component={runtime.id} data-status="scaffold">
+              <th scope="row">{runtime.name}<br /><a href={`https://github.com/logifos/${runtime.repository}`}><code>{runtime.package}</code></a></th>
+              <td>None. Scaffold; rendering is unavailable.</td>
+              <td>{runtime.development}</td>
+              <td>{runtime.transport}</td>
+              <td>{runtime.output}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p>No operating system or CPU architecture is qualified for rendering. Native gems, wheels and Node/browser WASM packages are planned; no platform is supported on the strength of a scaffold build. Node tests cannot establish browser support.</p>
+    <p><a href="/install.html">Work from a development checkout →</a></p>
+  </section>
+  <section id="coverage" aria-labelledby="coverage-title">
+    <h2 id="coverage-title">What remains planned</h2>
+    <p>MathML parsing and Formula conversion, Fontisan-backed layout, deterministic SVG, Ruby PNG conversion and native/WASM delivery all remain planned rendering work. There is no working browser demonstration, verified package train, performance comparison or visual coverage claim here.</p>
+    <p>Planned qualification requires pinned engine artifacts, external schemas and corpus revisions, followed by installed-package checks. Ruby and TypeScript are intended to launch together after both qualify; Python follows.</p>
+  </section>
+  <ContractLinks />
+</Site>
