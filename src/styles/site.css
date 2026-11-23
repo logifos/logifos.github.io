@@ -1,0 +1,61 @@
+:root {
+  color-scheme: light;
+  font-family: "Segoe UI", "Liberation Sans", sans-serif;
+  color: #20354b;
+  background: #f3f7fc;
+  line-height: 1.65;
+  font-synthesis: none;
+  --ink: #20354b;
+  --link: #135b94;
+  --rule: #c4d3e4;
+  --paper: #fff;
+  --signal: #8b410b;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: var(--link); text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 0.15em; }
+:focus-visible { outline: 3px solid var(--signal); outline-offset: 5px; }
+.frame { width: min(100% - 3rem, 66rem); margin-inline: auto; }
+.skip-link { position: absolute; top: -8rem; left: 1rem; padding: 0.75rem; background: var(--paper); }
+.skip-link:focus { top: 0.5rem; }
+.site-header { display: flex; justify-content: space-between; align-items: center; gap: 2rem; padding-block: 1.5rem; border-bottom: 1px solid var(--rule); }
+.brand { font-size: 1.6rem; font-weight: 750; letter-spacing: -0.05em; color: var(--ink); text-decoration: none; }
+nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+nav a { text-decoration: none; }
+nav a[aria-current="page"] { text-decoration: underline; font-weight: 700; }
+.opening { padding-block: 4rem 2rem; }
+.kicker, .status-label, .gates dt { font-family: "SFMono-Regular", Consolas, monospace; font-size: 0.85rem; }
+.kicker { letter-spacing: 0.05em; }
+h1 { font-family: "Trebuchet MS", "Liberation Sans", sans-serif; font-size: clamp(2.7rem, 7vw, 5rem); line-height: 1.08; letter-spacing: -0.045em; font-weight: 700; margin: 1.25rem 0; }
+h2 { font-size: 1.55rem; line-height: 1.25; margin-top: 0; }
+h3 { font-size: 1.1rem; margin: 0; }
+p { max-width: 72ch; }
+.introduction { font-size: 1.25rem; max-width: 48ch; }
+.status-note { max-width: 72ch; border-left: 4px solid var(--signal); background: var(--paper); padding: 1.1rem 1.4rem; margin-top: 2rem; }
+main > section + section { margin-block: 2rem 3.5rem; }
+.runtime-list { border-top: 1px solid var(--rule); }
+.runtime-list > div { display: grid; grid-template-columns: 12rem 1fr; gap: 2rem; padding: 1.4rem 0; border-bottom: 1px solid var(--rule); }
+.runtime-list dt { font-weight: 700; font-size: 1.15rem; }
+.runtime-list dt a { display: block; font-size: 0.95rem; font-weight: 400; }
+dd { margin: 0; }
+.status-label { display: inline-block; color: var(--signal); background: #ffedda; border-radius: 0.25rem; padding: 0.1rem 0.6rem; }
+.runtime-list dd p { margin: 0.45rem 0 0; }
+.next-steps { max-width: 75ch; }
+.pipeline { padding-left: 1.7rem; max-width: 75ch; }
+.pipeline li { padding: 0.6rem 0 0.6rem 0.5rem; }
+.pipeline li::marker { color: var(--link); font-weight: 700; }
+.pipeline p { margin: 0.35rem 0; }
+.gates > div { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; padding: 0.8rem 0; border-bottom: 1px solid var(--rule); }
+.gates dt { font-weight: 700; }
+.site-footer { border-top: 1px solid var(--rule); padding-block: 1.5rem 2.5rem; font-size: 0.9rem; }
+.site-footer p { margin-block: 0.25rem; }
+
+@media (max-width: 38rem) {
+  .frame { width: calc(100% - 2rem); }
+  .site-header { align-items: flex-start; flex-direction: column; gap: 0.8rem; }
+  nav { gap: 1.2rem; }
+  .opening { padding-top: 2.5rem; }
+  .runtime-list > div { grid-template-columns: 1fr; gap: 0.65rem; }
+}

@@ -1,0 +1,48 @@
+---
+import Site from '../layouts/Site.astro';
+
+const pipeline = [
+  ['Syntax models', 'Parse supported MathML into structured syntax data. LaTeX and AsciiMath follow later.'],
+  ['Formula', 'Transform into the central Formula model, preserving supported presentation and style information. Unsupported input must receive an explicit refusal.'],
+  ['Layout', 'Resolve style and font information into a private box tree without reparsing source or bypassing Formula.'],
+  ['SVG', 'Emit deterministic SVG from the layout tree. Structural and visual checks are future qualification gates.'],
+];
+const gates = [
+  ['P0', 'Bootstrap and green CI.'],
+  ['P1', 'MathML parsing, Formula transformation, writing, and corpus parity.'],
+  ['P2', 'Layout, Fontisan integration, and box snapshots.'],
+  ['P3', 'SVG plus structural and visual qualification.'],
+  ['P4', 'Ruby, PNG, and consumer rendering qualification.'],
+  ['P5', 'WASM and TypeScript qualification, then Python.'],
+  ['P6', 'Operational quality and release trains.'],
+];
+---
+<Site title="Planned architecture" description="The intended Logifos rendering pipeline and delivery gates. No phase completion is claimed." page="architecture">
+  <section class="opening" aria-labelledby="title">
+    <p class="kicker">Architecture / design intent</p>
+    <h1 id="title">From syntax<br />to a shared model.</h1>
+    <p class="introduction">The intended architecture keeps formula meaning separate from layout and runtime delivery.</p>
+    <aside class="status-note" id="bootstrap-notice" aria-label="Current limitation">
+      <strong>Scaffold stage.</strong> This is a planned design. Rendering is unavailable, and the pipeline below is not an implemented end-to-end renderer.
+    </aside>
+  </section>
+  <section aria-labelledby="pipeline-title">
+    <h2 id="pipeline-title">Planned rendering path</h2>
+    <ol class="pipeline">
+      {pipeline.map(([name, detail]) => <li><h3>{name}</h3><p>{detail}</p></li>)}
+    </ol>
+  </section>
+  <section aria-labelledby="fonts-title">
+    <h2 id="fonts-title">Fonts and output</h2>
+    <p>Caller-provided fonts are intended to flow through Fontisan, with multiple fonts supported. No default font or copied metrics table is bundled here.</p>
+    <p>SVG is the planned core output. PNG is planned through a separate conversion layer; this scaffold does not provide SVG or PNG rendering.</p>
+  </section>
+  <section aria-labelledby="gates-title">
+    <h2 id="gates-title">Planned delivery gates</h2>
+    <dl class="gates">
+      {gates.map(([phase, detail]) => <div><dt>{phase}</dt><dd>{detail}</dd></div>)}
+    </dl>
+    <p>No phase completion is claimed by this site. Wrapper preparation can happen early; it does not satisfy a later rendering gate. Ruby and TypeScript launch together only after both qualify; Python follows.</p>
+    <a href="/#status">Return to current status →</a>
+  </section>
+</Site>

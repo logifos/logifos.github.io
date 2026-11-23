@@ -1,0 +1,36 @@
+---
+import '../styles/site.css';
+
+interface Props {
+  title: string;
+  description: string;
+  page: 'status' | 'architecture';
+}
+
+const { title, description, page } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title} — Logifos</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header frame">
+      <a class="brand" href="/">Logifos</a>
+      <nav aria-label="Main navigation">
+        <a href="/#status" aria-current={page === 'status' ? 'page' : undefined}>Status</a>
+        <a href="/architecture.html" aria-current={page === 'architecture' ? 'page' : undefined}>Architecture</a>
+        <a href="https://github.com/logifos">Source</a>
+      </nav>
+    </header>
+    <main id="main" class="frame"><slot /></main>
+    <footer class="site-footer frame">
+      <p>© 2026 Ribose Inc. · <a href="/LICENSE.txt">MIT license</a></p>
+      <p>Project status and planned architecture. Rendering is unavailable.</p>
+    </footer>
+  </body>
+</html>
