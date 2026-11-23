@@ -1,0 +1,38 @@
+---
+import Site from '../layouts/Site.astro';
+
+const runtimes = [
+  { id: 'rust', name: 'Rust', repo: 'logifos-rs', path: 'logifos-rs', detail: 'Engine and model foundations; rendering is unavailable.' },
+  { id: 'ruby', name: 'Ruby', repo: 'logifos', path: 'logifos-ruby', detail: 'Bootstrap gem with a placeholder API that refuses rendering.' },
+  { id: 'typescript', name: 'TypeScript', repo: 'logifos-ts', path: 'logifos-ts', detail: 'Bootstrap package with an explicit unimplemented refusal; no engine delivery yet.' },
+  { id: 'python', name: 'Python', repo: 'logifos', path: 'logifos-python', detail: 'Bootstrap distribution with a placeholder API that refuses rendering.' },
+];
+---
+<Site title="Bootstrap status" description="Current Logifos engine and runtime status: scaffolds, with rendering unavailable." page="status">
+  <section class="opening" aria-labelledby="title">
+    <p class="kicker">Math formula rendering / project status</p>
+    <h1 id="title">The foundation<br />comes first.</h1>
+    <p class="introduction">Logifos is being built as a Rust math formula engine with Ruby, TypeScript, and Python runtimes.</p>
+    <aside class="status-note" id="bootstrap-notice" aria-label="Current limitation">
+      <strong>Scaffold stage.</strong> The engine and runtimes are placeholders. Rendering is unavailable; this site has no working demo.
+    </aside>
+  </section>
+  <section id="status" aria-labelledby="status-title">
+    <h2 id="status-title">Current engine and runtimes</h2>
+    <p>Bootstrap preparation does not qualify a rendering runtime.</p>
+    <dl class="runtime-list">
+      {runtimes.map((runtime) => (
+        <div data-component={runtime.id} data-status="scaffold">
+          <dt>{runtime.name}<a href={`https://github.com/logifos/${runtime.path}`}>{runtime.repo}</a></dt>
+          <dd><span class="status-label">Scaffold</span><p>{runtime.detail}</p></dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+  <section class="next-steps" aria-labelledby="next-title">
+    <h2 id="next-title">Planned next steps</h2>
+    <p>MathML support comes first, followed by layout and SVG. Ruby and PNG qualification precede TypeScript and Python delivery. LaTeX follows MathML; AsciiMath comes last. These are planned gates, not completed capabilities.</p>
+    <p>Ruby and TypeScript are intended to launch together after both qualify. Python follows.</p>
+    <a href="/architecture.html">Explore the planned architecture →</a>
+  </section>
+</Site>
