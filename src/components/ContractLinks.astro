@@ -1,0 +1,34 @@
+---
+import contract from '../data/contract.json';
+
+const labels = {
+  guide: 'Wire contract guide',
+  request: 'Request envelope schema',
+  response: 'Response envelope schema',
+  payload_pins: 'External payload pins',
+};
+---
+<section id="contract" aria-labelledby="contract-title">
+  <h2 id="contract-title">Contract source</h2>
+  <p>
+    These references point to an unreleased source snapshot of <code>logifos-rs</code>,
+    revision <code>{contract.revision}</code>. It specifies a target contract;
+    it is not a release or an implemented renderer. This site keeps no schema copies.
+  </p>
+  <ul>
+    {Object.entries(contract.references).map(([key, path]) => (
+      <li><a data-contract-reference={key} href={`${contract.repository}/blob/${contract.revision}/${path}`}>{labels[key as keyof typeof labels]}</a></li>
+    ))}
+  </ul>
+  <p>
+    The target ABI version is <span data-contract-version="abi">{contract.abi_version}</span>;
+    the target JSON schema version is <span data-contract-version="schema">{contract.schema_version}</span>.
+    Neither number is a package version. Formula and MathML syntax payload pins
+    remain unresolved in this snapshot, so successful payload qualification is blocked.
+  </p>
+  <p>
+    Once a release is qualified, these references are planned to follow its
+    pinned core revision and compatibility record. There is no release version
+    matrix to consume yet.
+  </p>
+</section>

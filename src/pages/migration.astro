@@ -1,0 +1,30 @@
+---
+import Site from '../layouts/Site.astro';
+import StatusNotice from '../components/StatusNotice.astro';
+---
+<Site title="Migration and compatibility" description="Planned compatibility rules for an unreleased Logifos API. There is no stable rendering release to migrate from." page="migration">
+  <section class="opening" aria-labelledby="title">
+    <p class="kicker">Migration / development interfaces</p>
+    <h1 id="title">No stable API<br />to migrate yet.</h1>
+    <p class="introduction">The bootstrap exposes placeholders. The wire specification describes a planned interface, not compatibility with an earlier rendering release.</p>
+    <StatusNotice />
+  </section>
+  <section id="compatibility" aria-labelledby="compatibility-title">
+    <h2 id="compatibility-title">Planned compatibility checks</h2>
+    <p>A future release record is planned to map each registry package version to the exact engine revision and artifact hashes, ABI/schema versions and corpus revision. Matching package version strings alone will not prove compatibility.</p>
+    <ol>
+      <li>Keep package versions, ABI version and JSON schema version separate. Check the release record before changing a package or native/WASM artifact.</li>
+      <li>Use the planned negotiation operation to check exact versions and implemented operations. A recognized version does not promise render support.</li>
+      <li>Pin Formula and syntax payload identities independently, including origin, full revision, schema path and file hash. Unresolved pins block payload qualification.</li>
+      <li>Recheck the same named conformance cases through the installed artifact. Native and real-browser results need separate evidence.</li>
+    </ol>
+    <p>These are planned release practices. No qualified release record or supported upgrade path exists yet. The <a href="/api.html#contract">linked contract snapshot</a> is the current documentation reference, not a substitute for a future release pin.</p>
+  </section>
+  <section id="callers" aria-labelledby="callers-title">
+    <h2 id="callers-title">Preparing a development caller</h2>
+    <p>Expect bootstrap signatures and failure shapes to change. The target contract uses structured error codes rather than diagnostic-string matching. Preserve child order and meaningful presentation when transforming syntax; unsupported input must receive a refusal.</p>
+    <p>For the planned render API, supply font bytes, hashes, face indices and an explicit fallback order on each call. Handle resource refusals without accepting partial output. Keep native allocations with the library context that created them.</p>
+    <p>The planned Ruby PNG path first obtains qualified SVG, then passes it to <code>svgpng</code>. Sending PNG to the core is specified to fail with <code>UNSUPPORTED_OUTPUT</code>. No rendering migration example can run against this scaffold.</p>
+    <p><a href="/status.html">Check current runtime status →</a></p>
+  </section>
+</Site>

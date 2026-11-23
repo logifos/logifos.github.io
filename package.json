@@ -9,7 +9,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check:site": "node tools/check-built-site.mjs"
+    "check:site": "node tools/check-built-site.mjs",
+    "check:contracts": "python3 tools/check-contract-links.py",
+    "test:contracts": "python3 tools/test-contract-links.py"
   },
   "devDependencies": { "astro": "7.4.13", "parse5": "8.1.1" }
 }

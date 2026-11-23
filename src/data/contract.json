@@ -1,0 +1,13 @@
+{
+  "repository": "https://github.com/logifos/logifos-rs",
+  "revision": "d847288ae655673baa8d645e9338afe5ca34506b",
+  "release": null,
+  "abi_version": 1,
+  "schema_version": 1,
+  "references": {
+    "guide": "docs/CONTRACT.md",
+    "request": "contracts/request.schema.json",
+    "response": "contracts/response.schema.json",
+    "payload_pins": "contracts/pins.json"
+  }
+}

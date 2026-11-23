@@ -1,5 +1,6 @@
 ---
 import Site from '../layouts/Site.astro';
+import StatusNotice from '../components/StatusNotice.astro';
 
 const pipeline = [
   ['Syntax models', 'Parse supported MathML into structured syntax data. LaTeX and AsciiMath follow later.'],
@@ -7,42 +8,37 @@ const pipeline = [
   ['Layout', 'Resolve style and font information into a private box tree without reparsing source or bypassing Formula.'],
   ['SVG', 'Emit deterministic SVG from the layout tree. Structural and visual checks are future qualification gates.'],
 ];
-const gates = [
-  ['P0', 'Bootstrap and green CI.'],
-  ['P1', 'MathML parsing, Formula transformation, writing, and corpus parity.'],
-  ['P2', 'Layout, Fontisan integration, and box snapshots.'],
-  ['P3', 'SVG plus structural and visual qualification.'],
-  ['P4', 'Ruby, PNG, and consumer rendering qualification.'],
-  ['P5', 'WASM and TypeScript qualification, then Python.'],
-  ['P6', 'Operational quality and release trains.'],
-];
 ---
 <Site title="Planned architecture" description="The intended Logifos rendering pipeline and delivery gates. No phase completion is claimed." page="architecture">
   <section class="opening" aria-labelledby="title">
     <p class="kicker">Architecture / design intent</p>
     <h1 id="title">From syntax<br />to a shared model.</h1>
     <p class="introduction">The intended architecture keeps formula meaning separate from layout and runtime delivery.</p>
-    <aside class="status-note" id="bootstrap-notice" aria-label="Current limitation">
-      <strong>Scaffold stage.</strong> This is a planned design. Rendering is unavailable, and the pipeline below is not an implemented end-to-end renderer.
-    </aside>
+    <StatusNotice />
+  </section>
+  <section aria-labelledby="boundary-title">
+    <h2 id="boundary-title">One planned JSON boundary</h2>
+    <p>Every runtime is planned to enter through <code>logifos-facade</code>, with explicit operations and per-call options. All JSON decoding belongs to <code>logifos-json</code>. The target boundary returns typed failures and contains panics; the bootstrap does not implement that full contract.</p>
+    <p>Rust owns parsing, transformation, layout and SVG. The planned Ruby and Python adapters use one portable native ABI; TypeScript uses WASM. Runtime wrappers do not contain another layout engine.</p>
+    <p><a href="/api.html#contract">Read the pinned wire contract →</a></p>
   </section>
   <section aria-labelledby="pipeline-title">
     <h2 id="pipeline-title">Planned rendering path</h2>
     <ol class="pipeline">
       {pipeline.map(([name, detail]) => <li><h3>{name}</h3><p>{detail}</p></li>)}
     </ol>
+    <p>A planned new syntax adds a <code>logifos-syntax-*</code> crate and its transformer. It does not change the layout or rendering core. The upstream Formula model and MathML syntax payload schemas still need authoritative pins; this site defines neither.</p>
   </section>
   <section aria-labelledby="fonts-title">
     <h2 id="fonts-title">Fonts and output</h2>
-    <p>Caller-provided fonts are intended to flow through Fontisan, with multiple fonts supported. No default font or copied metrics table is bundled here.</p>
-    <p>SVG is the planned core output. PNG is planned through a separate conversion layer; this scaffold does not provide SVG or PNG rendering.</p>
+    <p>The planned Fontisan integration validates caller-supplied font bytes, faces and MATH data. Each call supplies hashes and an explicit fallback order; host fonts and network lookup are outside the target contract.</p>
+    <p>SVG is the planned core output, with fixed ordering and no timestamps. Byte stability requires the same engine artifact, contract pins, options, font bytes and fallback order.</p>
+    <p>PNG is planned only as Ruby-side conversion of qualified SVG through <code>svgpng</code>. The core contract refuses PNG. This scaffold provides neither SVG nor PNG rendering.</p>
   </section>
   <section aria-labelledby="gates-title">
     <h2 id="gates-title">Planned delivery gates</h2>
-    <dl class="gates">
-      {gates.map(([phase, detail]) => <div><dt>{phase}</dt><dd>{detail}</dd></div>)}
-    </dl>
+    <p>The planned gates cover MathML and Formula preservation, font-backed layout, SVG structure and visual results, installed runtime packages, then coordinated releases. A shared conformance corpus is planned to check the same behavior across transports.</p>
     <p>No phase completion is claimed by this site. Wrapper preparation can happen early; it does not satisfy a later rendering gate. Ruby and TypeScript launch together only after both qualify; Python follows.</p>
-    <a href="/#status">Return to current status →</a>
+    <a href="/status.html">Return to current status →</a>
   </section>
 </Site>

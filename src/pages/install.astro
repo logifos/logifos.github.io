@@ -1,0 +1,39 @@
+---
+import Site from '../layouts/Site.astro';
+import StatusNotice from '../components/StatusNotice.astro';
+import runtimes from '../data/runtimes.json';
+---
+<Site title="Development setup" description="Work from a Logifos source checkout. There is no released renderer or registry installation to recommend." page="install">
+  <section class="opening" aria-labelledby="title">
+    <p class="kicker">Install / development from checkout</p>
+    <h1 id="title">Start with<br />the source.</h1>
+    <p class="introduction">There is no released rendering package to install. These instructions prepare development checkouts only.</p>
+    <StatusNotice />
+  </section>
+  <section id="site" aria-labelledby="site-title">
+    <h2 id="site-title">Build this documentation checkout</h2>
+    <p>Use Node.js 22.23.4 or later and npm 9.6.5 or later; the site check uses Node.js 24. These requirements belong to the documentation toolchain, not the planned TypeScript runtime.</p>
+    <pre><code>{`git clone https://github.com/logifos/logifos.github.io.git
+cd logifos.github.io
+npm ci
+npm run build
+npm run check:site
+npm run check:contracts
+npm run preview -- --host 127.0.0.1`}</code></pre>
+    <p>Open the local preview address printed by Astro. This builds static documentation; it does not install an engine or render formulas. Stop the preview with Ctrl-C.</p>
+  </section>
+  <section id="runtimes" aria-labelledby="runtimes-title">
+    <h2 id="runtimes-title">Prepare runtime source checkouts</h2>
+    <p>These commands retrieve development source only. Follow each checkout's README for its local development setup and current limitations. The default branch may differ from the pinned wire snapshot linked by this site. No registry install or working rendering flow is claimed.</p>
+    {runtimes.map((runtime) => (
+      <div class="checkout">
+        <h3>{runtime.name}</h3>
+        <p>{runtime.development}</p>
+        <pre><code>{`git clone https://github.com/logifos/${runtime.repository}.git
+cd ${runtime.repository}`}</code></pre>
+        <p>Run each example from your parent workspace directory. <a href={`https://github.com/logifos/${runtime.repository}`}>Read the {runtime.name} source documentation</a>.</p>
+      </div>
+    ))}
+    <p>Native libraries, WASM artifacts and font-backed rendering are planned. No released binary download, supported platform list or automatic font installation is available. See the <a href="/status.html#runtime-matrix">runtime matrix</a> before choosing a development target.</p>
+  </section>
+</Site>

@@ -51,6 +51,15 @@ dd { margin: 0; }
 .gates dt { font-weight: 700; }
 .site-footer { border-top: 1px solid var(--rule); padding-block: 1.5rem 2.5rem; font-size: 0.9rem; }
 .site-footer p { margin-block: 0.25rem; }
+.table-scroll { overflow-x: auto; margin-block: 1.25rem; }
+table { border-collapse: collapse; width: 100%; background: var(--paper); }
+caption { text-align: left; font-weight: 700; padding-bottom: 0.75rem; }
+th, td { text-align: left; vertical-align: top; padding: 0.8rem; border-bottom: 1px solid var(--rule); min-width: 9rem; }
+thead { background: #e4edf7; }
+code { font-family: "SFMono-Regular", Consolas, monospace; font-size: 0.9em; overflow-wrap: anywhere; }
+pre { overflow-x: auto; padding: 1rem; border: 1px solid var(--rule); background: var(--paper); max-width: 100%; }
+pre code { overflow-wrap: normal; }
+.checkout { margin-block: 2rem; }
 
 @media (max-width: 38rem) {
   .frame { width: calc(100% - 2rem); }

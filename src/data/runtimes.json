@@ -1,0 +1,38 @@
+[
+  {
+    "id": "rust",
+    "name": "Rust",
+    "package": "logifos-*",
+    "repository": "logifos-rs",
+    "development": "No validated compiler minimum is documented here.",
+    "transport": "Rust facade through the shared JSON boundary",
+    "output": "SVG"
+  },
+  {
+    "id": "ruby",
+    "name": "Ruby",
+    "package": "logifos",
+    "repository": "logifos-ruby",
+    "development": "Ruby 3.2 or later is the bootstrap requirement.",
+    "transport": "Portable native C ABI",
+    "output": "SVG; PNG through svgpng after SVG qualification"
+  },
+  {
+    "id": "typescript",
+    "name": "TypeScript",
+    "package": "logifos-ts",
+    "repository": "logifos-ts",
+    "development": "Node.js 22 is the development target. Browser support is unqualified.",
+    "transport": "WASM with separate Node and browser entry points",
+    "output": "SVG"
+  },
+  {
+    "id": "python",
+    "name": "Python",
+    "package": "logifos",
+    "repository": "logifos-python",
+    "development": "Python 3.9 or later is the bootstrap requirement.",
+    "transport": "ctypes over the portable native C ABI",
+    "output": "SVG"
+  }
+]
