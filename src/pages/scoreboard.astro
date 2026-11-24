@@ -63,7 +63,7 @@ const stageEntries = (source: (typeof scoreboard.sources)[number]) =>
   <section id="method" aria-labelledby="method-title">
     <h2 id="method-title">How the scoreboard is produced</h2>
     <p>Fetch the pinned suites with <code>scripts/fetch-reference-corpus.sh</code> in the logifos-rs checkout, then replay with <code>cargo run -p logifos-corpus -- --reference</code>. Every case is flattened into the conformance manifest format and graded by the identical pipeline; the JSON snapshot this page renders is that run's deterministic output.</p>
-    <p>Rendering layout requires a font: cases completing the full roundtrip stop at <code>layout/font_not_configured</code> until a pinned math font ships in the grading corpus. Their capability depth stays visible in the stage counts above.</p>
+    <p>Layout and emission grade against the pinned STIX Two Math face; where it is materialized, cases completing the full roundtrip render to deterministic SVG — the first fonted replay passed 85 lasem cases end to end. Cases stopping at <code>layout/font_not_configured</code> were graded without the font materialized locally.</p>
     <p><a href="https://github.com/logifos/logifos-rs/tree/main/corpus/reference">Corpus pins and fetch script →</a></p>
   </section>
   <ContractLinks />
