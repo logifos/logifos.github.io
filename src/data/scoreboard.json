@@ -13,6 +13,10 @@
         "pass": 0,
         "refusal": 4
       },
+      "font": {
+        "face_index": 0,
+        "sha256": "562551b15b836e6e01d1b7350909baf3c8c8d83260c1190fbf4544333e6936de"
+      },
       "id": "jeuclid",
       "revision": "1dd19534348ba6e146a8eed293446430e104f603",
       "stage_counts": {
@@ -33,6 +37,10 @@
         "pass": 0,
         "refusal": 128
       },
+      "font": {
+        "face_index": 0,
+        "sha256": "562551b15b836e6e01d1b7350909baf3c8c8d83260c1190fbf4544333e6936de"
+      },
       "id": "katex",
       "revision": "9b2280dee4acb4da7d866dbaccad120b00949c27",
       "stage_counts": {
@@ -42,7 +50,10 @@
     },
     {
       "categories": {
-        "refusal:layout:font_not_configured": 105,
+        "pass:emit:complete": 85,
+        "refusal:layout:INVALID_GEOMETRY": 1,
+        "refusal:layout:MISSING_GLYPH": 17,
+        "refusal:layout:NOT_IMPLEMENTED": 2,
         "refusal:parse:malformed_xml": 1,
         "refusal:parse:unsafe_xml": 22,
         "refusal:parse:unsupported_syntax": 6,
@@ -54,13 +65,21 @@
       },
       "counts": {
         "failure": 0,
-        "pass": 0,
-        "refusal": 422
+        "pass": 85,
+        "refusal": 337
+      },
+      "font": {
+        "face_index": 0,
+        "sha256": "562551b15b836e6e01d1b7350909baf3c8c8d83260c1190fbf4544333e6936de"
       },
       "id": "lasem",
       "revision": "e657038b7f348a91fabd06da192aedef137bd2f2",
       "stage_counts": {
-        "layout:refusal:font_not_configured": 105,
+        "emit:pass:complete": 85,
+        "layout:pass:complete": 85,
+        "layout:refusal:INVALID_GEOMETRY": 1,
+        "layout:refusal:MISSING_GLYPH": 17,
+        "layout:refusal:NOT_IMPLEMENTED": 2,
         "parse:pass:complete": 393,
         "parse:refusal:malformed_xml": 1,
         "parse:refusal:unsafe_xml": 22,
@@ -86,6 +105,10 @@
         "pass": 0,
         "refusal": 2254
       },
+      "font": {
+        "face_index": 0,
+        "sha256": "562551b15b836e6e01d1b7350909baf3c8c8d83260c1190fbf4544333e6936de"
+      },
       "id": "mathjax",
       "revision": "7feeafff7b1deb0ccd9dfd329d59da7a3ba5c14a",
       "stage_counts": {
@@ -105,6 +128,10 @@
         "pass": 0,
         "refusal": 4029
       },
+      "font": {
+        "face_index": 0,
+        "sha256": "562551b15b836e6e01d1b7350909baf3c8c8d83260c1190fbf4544333e6936de"
+      },
       "id": "webkit-mathml",
       "revision": "c452784b757b1512c9dc6c01f490649976c51230",
       "stage_counts": {
@@ -117,7 +144,7 @@
   ],
   "totals": {
     "failure": 0,
-    "pass": 0,
-    "refusal": 6837
+    "pass": 85,
+    "refusal": 6752
   }
 }
