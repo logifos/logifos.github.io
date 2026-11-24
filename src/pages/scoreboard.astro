@@ -1,6 +1,7 @@
 ---
 import Site from '../layouts/Site.astro';
 import ContractLinks from '../components/ContractLinks.astro';
+import StatusNotice from '../components/StatusNotice.astro';
 import scoreboard from '../data/scoreboard.json';
 
 const format = (value: number) => value.toLocaleString('en-US');
@@ -14,6 +15,7 @@ const stageEntries = (source: (typeof scoreboard.sources)[number]) =>
     <p class="kicker">Scoreboard / reference corpora</p>
     <h1 id="title">Every adopted corpus,<br />replayed case by case.</h1>
     <p class="introduction">The pinned reference-renderer suites replay through the same parse → transform → write → roundtrip → layout → emit pipeline as the conformance manifest. Cases refuse typed: an honest capability gap, never a silent one.</p>
+    <StatusNotice />
   </section>
   <section id="totals" aria-labelledby="totals-title">
     <h2 id="totals-title">Replay totals</h2>
