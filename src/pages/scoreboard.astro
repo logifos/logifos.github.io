@@ -1,0 +1,68 @@
+---
+import Site from '../layouts/Site.astro';
+import ContractLinks from '../components/ContractLinks.astro';
+import scoreboard from '../data/scoreboard.json';
+
+const format = (value: number) => value.toLocaleString('en-US');
+const stageEntries = (source: (typeof scoreboard.sources)[number]) =>
+  Object.entries(source.stage_counts as Record<string, number>).sort(([a], [b]) =>
+    a.localeCompare(b),
+  );
+---
+<Site title="Corpus scoreboard" description="Per-case replay of the reference-renderer corpora — KaTeX, MathJax, JEuclid, WebKit MathML and lasem — through the Logifos pipeline. Refusals are observations, not silent gaps." page="scoreboard">
+  <section class="opening" aria-labelledby="title">
+    <p class="kicker">Scoreboard / reference corpora</p>
+    <h1 id="title">Every adopted corpus,<br />replayed case by case.</h1>
+    <p class="introduction">The pinned reference-renderer suites replay through the same parse → transform → write → roundtrip → layout → emit pipeline as the conformance manifest. Cases refuse typed: an honest capability gap, never a silent one.</p>
+  </section>
+  <section id="totals" aria-labelledby="totals-title">
+    <h2 id="totals-title">Replay totals</h2>
+    <p>{format(scoreboard.totals.pass + scoreboard.totals.refusal + scoreboard.totals.failure)} cases across {scoreboard.sources.length} corpora: {format(scoreboard.totals.pass)} pass, {format(scoreboard.totals.refusal)} typed refusals, {format(scoreboard.totals.failure)} failures. Zero failures means the harness is sound; refusals mark where rendering capability stops today.</p>
+    <div class="table-scroll" role="region" aria-label="Corpus totals" tabindex="0">
+      <table>
+        <caption>Per-corpus replay outcomes at pinned revisions</caption>
+        <thead><tr><th scope="col">Corpus</th><th scope="col">Cases</th><th scope="col">Pass</th><th scope="col">Refusals</th><th scope="col">Failures</th><th scope="col">Pinned revision</th></tr></thead>
+        <tbody>
+          {scoreboard.sources.map((source) => (
+            <tr data-corpus={source.id}>
+              <th scope="row">{source.id}</th>
+              <td>{format(source.total)}</td>
+              <td>{format(source.counts.pass)}</td>
+              <td>{format(source.counts.refusal)}</td>
+              <td>{format(source.counts.failure)}</td>
+              <td><code>{String(source.revision).slice(0, 12)}</code></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section id="refusals" aria-labelledby="refusals-title">
+    <h2 id="refusals-title">Where capability stops</h2>
+    <p>The leading refusal categories per corpus name the next work item precisely — an unsupported element in the transform, a missing notation parser, or the font gate that layout requires.</p>
+    <div class="table-scroll" role="region" aria-label="Refusal categories per corpus" tabindex="0">
+      <table>
+        <caption>Refusal and pass categories by stage</caption>
+        <thead><tr><th scope="col">Corpus</th><th scope="col">Stage:outcome:category</th><th scope="col">Cases</th></tr></thead>
+        <tbody>
+          {scoreboard.sources.map((source) => (
+            stageEntries(source).map(([key, count]) => (
+              <tr data-corpus={source.id}>
+                <th scope="row">{source.id}</th>
+                <td><code>{key}</code></td>
+                <td>{format(count)}</td>
+              </tr>
+            ))
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section id="method" aria-labelledby="method-title">
+    <h2 id="method-title">How the scoreboard is produced</h2>
+    <p>Fetch the pinned suites with <code>scripts/fetch-reference-corpus.sh</code> in the logifos-rs checkout, then replay with <code>cargo run -p logifos-corpus -- --reference</code>. Every case is flattened into the conformance manifest format and graded by the identical pipeline; the JSON snapshot this page renders is that run's deterministic output.</p>
+    <p>Rendering layout requires a font: cases completing the full roundtrip stop at <code>layout/font_not_configured</code> until a pinned math font ships in the grading corpus. Their capability depth stays visible in the stage counts above.</p>
+    <p><a href="https://github.com/logifos/logifos-rs/tree/main/corpus/reference">Corpus pins and fetch script →</a></p>
+  </section>
+  <ContractLinks />
+</Site>

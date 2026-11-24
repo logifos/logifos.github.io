@@ -4,7 +4,7 @@ import '../styles/site.css';
 interface Props {
   title: string;
   description: string;
-  page: 'home' | 'status' | 'architecture' | 'api' | 'install' | 'migration';
+  page: 'home' | 'status' | 'scoreboard' | 'architecture' | 'api' | 'install' | 'migration';
 }
 
 const { title, description, page } = Astro.props;
@@ -23,6 +23,7 @@ const { title, description, page } = Astro.props;
       <a class="brand" href="/">Logifos</a>
       <nav aria-label="Main navigation">
         <a href="/status.html" aria-current={page === 'status' ? 'page' : undefined}>Status</a>
+        <a href="/scoreboard.html" aria-current={page === 'scoreboard' ? 'page' : undefined}>Scoreboard</a>
         <a href="/architecture.html" aria-current={page === 'architecture' ? 'page' : undefined}>Architecture</a>
         <a href="/api.html" aria-current={page === 'api' ? 'page' : undefined}>API</a>
         <a href="/install.html" aria-current={page === 'install' ? 'page' : undefined}>Install</a>
