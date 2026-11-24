@@ -16,7 +16,7 @@ function descendants(node) {
 }
 
 const pages = new Map();
-const expectedPages = ['api.html', 'architecture.html', 'index.html', 'install.html', 'migration.html', 'status.html'];
+const expectedPages = ['api.html', 'architecture.html', 'index.html', 'install.html', 'migration.html', 'scoreboard.html', 'status.html'];
 const filenames = (await readdir(root)).filter((name) => name.endsWith('.html')).sort();
 assert.deepEqual(filenames, expectedPages, 'expected documentation pages');
 for (const filename of filenames) {

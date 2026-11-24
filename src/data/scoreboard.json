@@ -1,0 +1,123 @@
+{
+  "format_version": 1,
+  "sources": [
+    {
+      "categories": {
+        "refusal:parse:unsafe_xml": 1,
+        "refusal:parse:unsupported_syntax": 1,
+        "refusal:transform:unsupported_attribute": 1,
+        "refusal:transform:unsupported_element": 1
+      },
+      "counts": {
+        "failure": 0,
+        "pass": 0,
+        "refusal": 4
+      },
+      "id": "jeuclid",
+      "revision": "1dd19534348ba6e146a8eed293446430e104f603",
+      "stage_counts": {
+        "parse:pass:complete": 2,
+        "parse:refusal:unsafe_xml": 1,
+        "parse:refusal:unsupported_syntax": 1,
+        "transform:refusal:unsupported_attribute": 1,
+        "transform:refusal:unsupported_element": 1
+      },
+      "total": 4
+    },
+    {
+      "categories": {
+        "refusal:input:latex_not_yet_supported": 128
+      },
+      "counts": {
+        "failure": 0,
+        "pass": 0,
+        "refusal": 128
+      },
+      "id": "katex",
+      "revision": "9b2280dee4acb4da7d866dbaccad120b00949c27",
+      "stage_counts": {
+        "input:refusal:latex_not_yet_supported": 128
+      },
+      "total": 128
+    },
+    {
+      "categories": {
+        "refusal:layout:font_not_configured": 105,
+        "refusal:parse:malformed_xml": 1,
+        "refusal:parse:unsafe_xml": 22,
+        "refusal:parse:unsupported_syntax": 6,
+        "refusal:transform:invalid_structure": 2,
+        "refusal:transform:unsupported_attribute": 221,
+        "refusal:transform:unsupported_content": 14,
+        "refusal:transform:unsupported_element": 14,
+        "refusal:transform:unsupported_operator": 37
+      },
+      "counts": {
+        "failure": 0,
+        "pass": 0,
+        "refusal": 422
+      },
+      "id": "lasem",
+      "revision": "e657038b7f348a91fabd06da192aedef137bd2f2",
+      "stage_counts": {
+        "layout:refusal:font_not_configured": 105,
+        "parse:pass:complete": 393,
+        "parse:refusal:malformed_xml": 1,
+        "parse:refusal:unsafe_xml": 22,
+        "parse:refusal:unsupported_syntax": 6,
+        "roundtrip:pass:complete": 105,
+        "transform:pass:complete": 105,
+        "transform:refusal:invalid_structure": 2,
+        "transform:refusal:unsupported_attribute": 221,
+        "transform:refusal:unsupported_content": 14,
+        "transform:refusal:unsupported_element": 14,
+        "transform:refusal:unsupported_operator": 37,
+        "writer:pass:complete": 105
+      },
+      "total": 422
+    },
+    {
+      "categories": {
+        "refusal:parse:invalid_utf8": 2,
+        "refusal:parse:unsafe_xml": 2252
+      },
+      "counts": {
+        "failure": 0,
+        "pass": 0,
+        "refusal": 2254
+      },
+      "id": "mathjax",
+      "revision": "7feeafff7b1deb0ccd9dfd329d59da7a3ba5c14a",
+      "stage_counts": {
+        "parse:refusal:invalid_utf8": 2,
+        "parse:refusal:unsafe_xml": 2252
+      },
+      "total": 2254
+    },
+    {
+      "categories": {
+        "refusal:parse:malformed_xml": 1233,
+        "refusal:parse:unsafe_xml": 2729,
+        "refusal:parse:unsupported_syntax": 67
+      },
+      "counts": {
+        "failure": 0,
+        "pass": 0,
+        "refusal": 4029
+      },
+      "id": "webkit-mathml",
+      "revision": "c452784b757b1512c9dc6c01f490649976c51230",
+      "stage_counts": {
+        "parse:refusal:malformed_xml": 1233,
+        "parse:refusal:unsafe_xml": 2729,
+        "parse:refusal:unsupported_syntax": 67
+      },
+      "total": 4029
+    }
+  ],
+  "totals": {
+    "failure": 0,
+    "pass": 0,
+    "refusal": 6837
+  }
+}
